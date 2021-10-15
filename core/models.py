@@ -8,3 +8,12 @@ class Publicação(models.Model):
     texto=models.TextField()
     imagem=StdImageField(upload_to='publicacoes/',blank=True)
     data=models.DateTimeField(auto_created=True)
+
+    class Meta:
+        verbose_name='Publicação'
+        verbose_name_plural='Publicações'
+
+
+
+    def __str__(self):
+        return self.usuario

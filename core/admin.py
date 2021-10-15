@@ -3,4 +3,4 @@ from .models import Publicação
 
 
 
-admin.register(Publicação)
+admin.site.register(Publicação)
