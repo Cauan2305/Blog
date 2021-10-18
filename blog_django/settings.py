@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'stdimage',
     'ckeditor',
+    'rest_framework',
     
 ]
 
@@ -137,9 +138,28 @@ LOGOUT_REDIRECT_URL='contas/login'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
+
+
 # EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# APIs Rest Full
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    'DEFAULT_PAGINATION_CLASS': 
+        'rest_framework.pagination.PageNumberPagination',
+        'PAGE_SIZE': 10      ,
+    
+        
+
+    
+}

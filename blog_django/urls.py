@@ -18,11 +18,23 @@ from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 
+# APIs 
+from rest_framework import routers
+from core.apis.viewsets import PublicaçãoViewSets,UserViewSets
+
+router=routers.DefaultRouter()
+router.register(r'user',UserViewSets,basename='usuarios')
+router.register(r'publicacao',PublicaçãoViewSets,basename='publicacao')
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('core.urls')),
     path('',include('usuarios.urls')), 
-    path('contas/',include('django.contrib.auth.urls'))
-    
+    path('contas/',include('django.contrib.auth.urls')),
+    path('api-auth/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', )),
+
+
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
