@@ -20,10 +20,10 @@ from django.conf import settings
 
 # APIs 
 from rest_framework import routers
-from core.apis.viewsets import PublicaçãoViewSets,UserViewSets
+from core.apis.viewsets import PublicaçãoViewSets
 
 router=routers.DefaultRouter()
-router.register(r'user',UserViewSets,basename='usuarios')
+# router.register(r'user',UserViewSets,basename='usuarios')
 router.register(r'publicacao',PublicaçãoViewSets,basename='publicacao')
 
 
