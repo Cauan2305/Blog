@@ -1,3 +1,4 @@
+from typing import Counter
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,User
 
@@ -8,23 +9,32 @@ class Publicação(models.Model):
     tag=models.CharField(max_length=200)
     usuario=models.ForeignKey(User,on_delete=models.PROTECT,)
     titulo=RichTextField()
- 
+    # slug=models.SlugField()
     texto=RichTextField()
     imagem=StdImageField(upload_to='publicacoes/',blank=True)
     data=models.DateTimeField(auto_now_add=True)
+    like=models.ManyToManyField(User,related_name='like',default=None,blank=True)
 
     class Meta:
         verbose_name='Publicação'
         verbose_name_plural='Publicações'
 
+
+
+
     def __str__(self):
         return self.tag
-    
+    @property
+    def cont_like(self)   :
+        return self.like.all().count()
 
 class Comentarios(models.Model):
-    usuario=models.ForeignKey(User,on_delete=models.PROTECT)
-    texto=RichTextField()
+    post=models.ForeignKey(Publicação,related_name='comentario'  ,on_delete=models.CASCADE)
+    nome=models.CharField(max_length=200,)
+    texto=models.TextField()
     data=models.DateTimeField(auto_now_add=True)
+
+
 
 
     class Meta:
@@ -32,4 +42,7 @@ class Comentarios(models.Model):
             verbose_name_plural='Comentarios'
 
     def __str__(self):
-            return self.usuario
+            return self.nome
+
+
+

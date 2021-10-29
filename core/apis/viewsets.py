@@ -1,8 +1,8 @@
-from .serializers import PublicaçãoSerializers
+from .serializers import PublicaçãoSerializers,ComentariosSerializer
 from rest_framework.generics import CreateAPIView, GenericAPIView, ListAPIView,ListCreateAPIView
 from rest_framework.viewsets import ModelViewSet, ViewSet
 from django.contrib.auth.models import User
-from core.models import Publicação
+from core.models import Publicação,Comentarios
 
 
 
@@ -17,10 +17,9 @@ class PublicaçãoViewSets(ModelViewSet):
     serializer_class=PublicaçãoSerializers
 
 
-    
+class ComentariosViewSets(ModelViewSet):
+    queryset=Comentarios.objects.all()
+    serializer_class=ComentariosSerializer
 
-# class PublicaçãoCreateView(CreateAPIView):
-#     queryset=Publicação.objects.all()
-#     serializer_class=PublicaçãoSerializers
 
         

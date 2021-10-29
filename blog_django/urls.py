@@ -17,13 +17,13 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
-
+# from core.views import *
 # APIs 
 from rest_framework import routers
-from core.apis.viewsets import PublicaçãoViewSets
+from core.apis.viewsets import PublicaçãoViewSets,ComentariosViewSets
 
 router=routers.DefaultRouter()
-# router.register(r'user',UserViewSets,basename='usuarios')
+router.register(r'comentarios',ComentariosViewSets,basename='comentarios')
 router.register(r'publicacao',PublicaçãoViewSets,basename='publicacao')
 
 
@@ -35,6 +35,9 @@ urlpatterns = [
     path('contas/',include('django.contrib.auth.urls')),
     path('api-auth/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', )),
-
-
+    # path('',index,name='index'),
+    # path('posts/<int:id>/',post,name='post'),
+    # path('like/',LikeView,name="like"),
+    # # path('<int:slug>',coment,name='coment'),
+# 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

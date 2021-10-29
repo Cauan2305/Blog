@@ -11,13 +11,33 @@
 
 </head>
 <body>
-    <form method="post">
+    <!-- parte publicacao -->
+{%block content%}
+    {% for p in posts %}
+        <a href="posts/{{p.id}}">{{p.titulo}}</a>
+        
+        <!-- <h2>{{p.texto}}</h2> -->
+        <!-- <h3>{{p.usuario}}</h3> -->
+        <h4> posted by  {{p.usuario}} at {{p.data}}</h4>
+        <br>
+        <br>
+        
+
+    {% endfor %}
+{% endblock content %}
+
+
+
+
+    <!-- <form action="/"  method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-
-
-        <button type="submit" >Entrar</button>
-
-    </form>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"  >Example textarea</label>
+            <input type="text" class="form-control" placeholder="Username" name="nome"  aria-label="Username"> 
+            <br>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="texto"  rows="3"></textarea>
+        </div>
+        <button type="submit">enviar</button>
+    </form> -->
 </body>
 </html>

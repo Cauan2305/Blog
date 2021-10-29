@@ -1,10 +1,14 @@
 from django.contrib import admin
-from .models import Publicação
+from .models import Publicação,Comentarios
 
+
+@admin.register(Comentarios)
+class ComentarioAdmin(admin.ModelAdmin):
+        list_display=('nome',)
 
 
 @admin.register(Publicação)
 class PublicacaoAdmin(admin.ModelAdmin):
         list_display=('tag','usuario','data')
-        list_filter=('tag','usuario')
+        list_filter=('tag',)
         search_fields=['tag']
