@@ -4,14 +4,15 @@ from django.contrib.auth.models import AbstractBaseUser,User
 
 from stdimage import StdImageField
 from ckeditor.fields import RichTextField
-
+from ckeditor_uploader.fields import RichTextUploadingField
 class Publicação(models.Model):
     tag=models.CharField(max_length=200)
     usuario=models.ForeignKey(User,on_delete=models.PROTECT,)
     titulo=RichTextField()
+    subtitulo=RichTextField()
     # slug=models.SlugField()
-    texto=RichTextField()
-    imagem=StdImageField(upload_to='publicacoes/',blank=True)
+    texto=RichTextUploadingField()
+    # imagem_background=StdImageField(upload_to='publicacoes/',)
     data=models.DateTimeField(auto_now_add=True)
     like=models.ManyToManyField(User,related_name='like',default=None,blank=True)
 

@@ -69,3 +69,10 @@ def LikeView(request,id):
 
     return redirect('post',id=post_id.id)
     
+
+def about(request):
+    return render(request,'about.html')
+
+
+def contato(request):
+    return render(request,'contact.html')

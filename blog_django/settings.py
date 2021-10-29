@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'stdimage',
     'ckeditor',
+    'ckeditor_uploader',
     'rest_framework',
     
 ]
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'blog_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,9 +129,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
+
+
 MEDIA_URL='media/'
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+
+CKEDITOR_UPLOAD_PATH='uploads/'
+
+
 
 
 LOGIN_REDIRECT_URL='/'

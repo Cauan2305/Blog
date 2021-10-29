@@ -9,6 +9,8 @@ urlpatterns = [
     path('',index,name='index'),
     path('posts/<int:id>/',post,name='post'),
     path('like/<int:id>',LikeView,name="like"),
+    path('about/',about,name='about'),
+    path('contato/',contato,name='contato'),
     # path('<int:slug>',coment,name='coment'),
 
 

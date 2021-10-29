@@ -1,72 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static  %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<html lang="pt-br">
+    {% load static %}
     {% load crispy_forms_tags %}
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Blog Cauan</title>
+        
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico'%}" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="{% url 'index'%}">Blog Cauan</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index'%}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about'%}">About</a></li>
+                        <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post/{{p.id}}">Sample Post</a></li> -->
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'contato'%}">Contact</a></li>
+                     
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Page Header-->
+        {%block content%}
+        <!-- <header class="masthead" style="background-image: url('{%  static 'assets/img/post-bg.jpg'%}')"> -->
+        <header class="masthead" style="background-image: url()">
+            
+        
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            <!-- <h1>Man must explore, and this is exploration at its greatest</h1> -->
+                            <h1>{{post.titulo|safe}}</h1>
+                            <h2 class="subheading">{{post.subtitulo|safe}}</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="#!">{{post.usuario|safe}}</a>
+                                  {{post.data}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                            {{post.texto|safe}}
 
-<body>
-    {%block content%}
-        <h1>{{post.titulo}}</h1>
-        <h2>{{post.texto}}</h2>
-        <h3>{{post.usuario}}</h3>
-        <h4> posted by {{post.data}}</h4>
+                            Placeholder text by
+                            <a href="#">{{post.usuario|safe}}</a>
+                            &middot; Images by
+                            <a href="#">{{post.usuario|safe}}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <!-- Button Like -->
+        <style>   
+            #comentario{
+                padding-left : 600px ;
+                padding-top:70px;
+            }
+            #comentario-1{
+                padding-left: 400px ;
+                padding-right: 400px ;
+            }
+            #c-1{
+                padding-left: 200px;
+                padding-right: 200px;
+                padding-top: 100px;
+            }
+        </style>
+        
+            <form action="{% url 'like' post.id  %}" method="post" id="comentario">
+                {% csrf_token %}
+                <div class="buttons are-large">
+                    <button  class="button" type="submit"  name="post_id"  value="{{post.id}}" >  <img src="https://img.icons8.com/material-rounded/50/000000/facebook-like--v1.png"/>  </button>
+                    
+                    <strong> Total {{post.like.all.count}} </strong>
+                </div>
 
+
+            </form>
+        
+        <!-- end -->
 
 
         <br>
         <br>
+        <hr>
+        <!-- Comentarios -->
+        <form  method="post">
+            {% csrf_token %}
+            <!-- <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label"  >Example textarea</label>
+                <input type="text" class="form-control" placeholder="Username" name="nome"  aria-label="Username"> 
+                <br>
+                <textarea class="form-control" id="exampleFormControlTextarea1" name="texto"  rows="3"></textarea>
+            </div>  -->
+            <div id="comentario-1">
+                <input class="input" type="text"  name="nome" placeholder="Nome">
+                <br>
+                <br>
+                <!-- <textarea class="textarea is-success"   placeholder="Success textarea">Escreva Seu Comentario</textarea> -->
+                <textarea class="textarea" placeholder="Escreva Seu Comentario" name="texto" ></textarea>
+                <!-- {{form.as_table}} -->
+                <br>
+                <input type="submit"   value='enviar'>
+            </div>
+        </form>
+
+
+        {% for comentarios in post.comentario.all %}  
+        <div id="c-1">
+            <div class="box">
+                <article class="media">
+                <div class="media-left">
+                    <!-- <figure class="image is-64x64"> -->
+                    <!-- <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image"> -->
+                    <!-- </figure> -->
+                </div>
+                <div class="media-content">
+                    <div class="content">
+                    <p>
+                        <strong>{{comentarios.nome}}</strong> &nbsp; &nbsp;  
+                        <br>
+                        <small> #{{comentarios.post}}</small>
+                        <br>
+                        <br>
+                        {{comentarios.texto}}
+                        <br>
+                        <p>{{comentarios.data}}</p>
+                    </p>
+                    </div>
+                    <!-- <nav class="level is-mobile">
+                    <div class="level-left">
+                        <a class="level-item" aria-label="reply">
+                        <span class="icon is-small">
+                            <i class="fas fa-reply" aria-hidden="true"></i>
+                        </span>
+                        </a>
+                        <a class="level-item" aria-label="retweet">
+                        <span class="icon is-small">
+                            <i class="fas fa-retweet" aria-hidden="true"></i>
+                        </span>
+                        </a>
+                        <a class="level-item" aria-label="like">
+                        <span class="icon is-small">
+                            <i class="fas fa-heart" aria-hidden="true"></i>
+                        </span>
+                        </a>
+                    </div>
+                    </nav> -->
+                </div>
+                </article>
+            </div>
+        </div>
         
-        <form action="{% url 'like' post.id  %}" method="post">
-                    {% csrf_token %}
-        
-                    <button type="submit"  name="post_id"  value="{{post.id}}" >Like   </button>
-                    <strong>{{post.like.all.count}}  Likes</strong>
+            <!--  -->
+        {% endfor %}
 
 
-                </form>
+        {% endblock content %}
 
 
 
 
-    {% endblock content %}
-    <hr>
-    <br>
-    <br>
-    {% for comentarios in post.comentario.all %}    
-        
-        <h3>{{comentarios.nome}}</h3>
-        <h3>{{comentarios.texto}}</h3>
-        <h3> comented :  {{comentarios.data}}</h3>
-    {% endfor %}
-
-    
 
 
-    <hr>
-    <br>
-    <br>
-    <!-- Comentarios -->
-    <form  method="post">
-        {% csrf_token %}
-        <!-- <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label"  >Example textarea</label>
-            <input type="text" class="form-control" placeholder="Username" name="nome"  aria-label="Username"> 
-            <br>
-            <textarea class="form-control" id="exampleFormControlTextarea1" name="texto"  rows="3"></textarea>
-        </div>  -->
-        {{form.as_table}}
-        <input type="submit"  value='enviar'>
-    </form>
-    <!--  -->
-
-
-    
-
-
-</body>
+        <!-- Footer-->
+        <footer class="border-top">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#!">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2021</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scripts.js'%}"></script>
+    </body>
 </html>

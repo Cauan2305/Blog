@@ -1,0 +1,76 @@
+index 
+
+<!-- {%block content%}
+    {% for p in posts %}
+        <a href="posts/{{p.id}}">{{p.titulo}}</a>
+        
+        <!-- <h2>{{p.texto}}</h2> -->
+        <!-- <h3>{{p.usuario}}</h3> -->
+        <h4> posted by  {{p.usuario}} at {{p.data}}</h4>
+        <br>
+        <br>
+        
+
+    {% endfor %}
+{% endblock content %} -->
+
+
+
+
+
+
+
+{%block content%}
+        <h1>{{post.titulo}}</h1>
+        <h2>{{post.texto}}</h2>
+        <h3>{{post.usuario}}</h3>
+        <h4> posted by {{post.data}}</h4>
+
+
+
+        <br>
+        <br>
+        
+        <form action="{% url 'like' post.id  %}" method="post">
+                    {% csrf_token %}
+        
+                    <button type="submit"  name="post_id"  value="{{post.id}}" >Like   </button>
+                    <strong>{{post.like.all.count}}  Likes</strong>
+
+
+                </form>
+
+
+
+
+    {% endblock content %}
+    <hr>
+    <br>
+    <br>
+    {% for comentarios in post.comentario.all %}    
+        
+        <h3>{{comentarios.nome}}</h3>
+        <h3>{{comentarios.texto}}</h3>
+        <h3> comented :  {{comentarios.data}}</h3>
+    {% endfor %}
+
+    
+
+
+    <hr>
+    <br>
+    <br>
+    <!-- Comentarios -->
+    <form  method="post">
+        {% csrf_token %}
+        <!-- <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"  >Example textarea</label>
+            <input type="text" class="form-control" placeholder="Username" name="nome"  aria-label="Username"> 
+            <br>
+            <textarea class="form-control" id="exampleFormControlTextarea1" name="texto"  rows="3"></textarea>
+        </div>  -->
+        {{form.as_table}}
+        <input type="submit"  value='enviar'>
+    </form>
+    <!--  -->
+    {% load crispy_forms_tags %}
