@@ -7,14 +7,23 @@ from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.mixins import LoginRequiredMixin
 from  django.urls import reverse_lazy,reverse
 from django.contrib import messages
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
-
-#View Index com exibição dos titulos
+#View Index com exibição dos titulos 
 def index(request):
+    # pu=Publicação.objects.all().order_by('id')
+    posts=Publicação.objects.all()
+    paginator=Paginator(posts,2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context={
-        'posts':Publicação.objects.all(),
+        'posts':posts,
+        'post':page_obj,
     }
+    
+
+
     return render(request,'index.html',context)
 # 
 

@@ -93,6 +93,41 @@
                 padding-right: 200px;
                 padding-top: 100px;
             }
+
+            @media screen and (min-width: 300px) and (max-width: 600px) {
+                #comentario{
+                    padding-left: 120px;
+                    /* padding-right: 100px ; */
+                }
+                #comentario-1{
+                padding-left: 20px ;
+                padding-right: 35px ;
+            }
+
+            }    
+            #c-1{
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-top: 50px;
+            }
+
+            @media screen and (min-width: 800px) and (max-width: 1080px) {
+                #comentario{
+                    padding-left: 300px;
+                    /* padding-right: 100px ; */
+                }
+                #comentario-1{
+                padding-left: 150px ;
+                padding-right: 150px ;
+                }
+                #c-1{
+                padding-left: 100px;
+                padding-right: 100px;
+                padding-top: 50px;
+                }
+
+            }
+
         </style>
         
             <form action="{% url 'like' post.id  %}" method="post" id="comentario">
