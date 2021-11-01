@@ -24,7 +24,7 @@ class Publicação(models.Model):
 
 
     def __str__(self):
-        return self.tag
+        return self.titulo
     @property
     def cont_like(self)   :
         return self.like.all().count()
