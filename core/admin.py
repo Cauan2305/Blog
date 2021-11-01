@@ -9,6 +9,6 @@ class ComentarioAdmin(admin.ModelAdmin):
 
 @admin.register(Publicação)
 class PublicacaoAdmin(admin.ModelAdmin):
-        list_display=('tag','usuario','data')
+        list_display=('titulo','tag','usuario','data')
         list_filter=('tag',)
         search_fields=['tag']
