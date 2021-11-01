@@ -4,6 +4,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import  FormView
 from .forms import ComentariosForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
 # from django.contrib.auth.mixins import LoginRequiredMixin
 from  django.urls import reverse_lazy,reverse
 from django.contrib import messages
@@ -56,6 +57,7 @@ def post(request,id):
 
 
 # Sistem of Like 
+@login_required
 def LikeView(request,id):
 
     user=request.user
@@ -76,7 +78,8 @@ def LikeView(request,id):
 
         }
 
-    return redirect('post',id=post_id.id)
+        
+        return redirect('post',id=post_id.id)
     
 
 def about(request):

@@ -32,7 +32,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('core.urls')),
     path('',include('usuarios.urls')), 
-    path('contas/',include('django.contrib.auth.urls'),name='contas'),
+    path('accounts/',include('django.contrib.auth.urls'),),
     path('api-auth/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', )),
     path('ckeditor/',include('ckeditor_uploader.urls')),
